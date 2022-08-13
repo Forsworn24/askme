@@ -5,11 +5,22 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[update show destroy edit hide]
 
   def create
-    question = Question.create(question_params)
+    # question = Question.create(question_params)
 
-    # flash[:notice] = "Новый вопрос создан!"
+    # # flash[:notice] = "Новый вопрос создан!"
 
-    redirect_to question_path(question), notice: "Новый вопрос создан!"
+    # redirect_to question_path(question), notice: "Новый вопрос создан!"
+
+    @question = Question.new(question_params)
+
+    if @question.save
+      redirect_to question_path(@question), notice: "Новый вопрос создан!"
+    else
+      flash.now[:alert] = "Вы неправильно заполнили поля формы вопроса, количество символов не должно превышать 280"
+
+      render :new
+    end
+
   end
 
   def update
