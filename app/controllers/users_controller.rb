@@ -63,6 +63,4 @@ class UsersController < ApplicationController
       :name, :nickname, :email, :password, :password_confirmation, :navbar_color
     )
   end
-
-
 end
