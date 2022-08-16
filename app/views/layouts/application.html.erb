@@ -30,8 +30,6 @@
       <% elsif flash[:alert].present? %>
         <p class="mb mt message message-alert"><%= flash[:alert]%></p>
       <% end %>
-
-      <%= user.nickname %>
     
       <%= yield %>
     </div>
