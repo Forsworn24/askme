@@ -11,7 +11,6 @@ class User < ApplicationRecord
     format: { with: /\A[0-9a-zA-Z\_]+\Z/ }
 
   has_many :questions, dependent: :delete_all
-  has_many :authors, dependent: :delete_all
     
   def downcase_nickname
     nickname.downcase!
