@@ -11,6 +11,9 @@ class User < ApplicationRecord
     format: { with: /\A[0-9a-zA-Z\_]+\Z/ }
 
   has_many :questions, dependent: :delete_all
+
+  include Gravtastic
+  gravtastic(secure: true, filetype: :png, size: 100, default: 'retro')
     
   def downcase_nickname
     nickname.downcase!
