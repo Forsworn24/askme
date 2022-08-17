@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :nickname, use: [:slugged, :history]
   # эта запись дополнительно добавляет валидацию
   has_secure_password
 
@@ -17,5 +19,9 @@ class User < ApplicationRecord
     
   def downcase_nickname
     nickname.downcase!
+  end
+
+  def should_generate_new_friendly_id?
+    nickname_changed?
   end
 end
