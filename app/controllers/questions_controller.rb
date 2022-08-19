@@ -32,6 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    # @question = Question.find_by user_id: current_user.id
     @question = Question.find(params[:id])
   end
 
@@ -41,7 +42,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @user = User.friendly.find(params[:user_id])
+    @user = User.find_by nickname: params[:user_id]
     @question = Question.new(user: @user)
   end
 
@@ -63,5 +64,4 @@ class QuestionsController < ApplicationController
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
   end
-
 end

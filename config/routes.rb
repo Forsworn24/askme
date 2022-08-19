@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
   resources :users, except: %i[index]
 
+  # get '/users/:nickname', to: 'users#show'
+
   resources :questions do
     get :hide, on: :member
   end
