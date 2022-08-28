@@ -43,7 +43,9 @@ class QuestionsController < ApplicationController
 
   def new
     if params[:user_id].present?
-      user = User.find(params[:user_id])
+      debugger
+      # user = User.find(params[:user_id])
+      user = User.find_by(nickname: params[:user_id])
       redirect_to(user_nickname: user)
       return
     end
