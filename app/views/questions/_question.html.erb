@@ -10,7 +10,7 @@
 
 <div class="hashtag">
   <% if question.hashtags.present? %>
-    <% question.hashtags.each do |tag| %>
+    <% question.hashtags.select(:name).distinct.each do |tag| %>
       <%= link_to "##{tag.name}", hashtag_path(tag.name), class: 'text-lead' %>
     <% end %>
   <% end %>
