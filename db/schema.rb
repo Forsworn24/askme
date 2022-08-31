@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_16_164349) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_29_210207) do
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "hashtag_questions", force: :cascade do |t|
+    t.integer "hashtag_id"
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_hashtag_questions_on_hashtag_id"
+    t.index ["question_id"], name: "index_hashtag_questions_on_question_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "body", null: false
     t.integer "user_id", null: false
@@ -31,7 +57,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_16_164349) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "navbar_color", default: "#370617"
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
 end

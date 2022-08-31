@@ -12,6 +12,19 @@
 
 <div class="container mt-sm">
     <h2 class="title-lg">
+      Список хештегов
+    </h2>
+    <div class="hashtag">
+      <% if @hashtags.present? %>
+        <% @hashtags.select(:name).distinct.each do |tag| %>
+          <%= link_to "##{tag.name}", hashtag_path(tag.name), class: 'text-lead' %>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+
+<div class="container mt-sm">
+    <h2 class="title-lg">
       <%= inclination(@questions.count, "Последний", "Последние", "Последние") %>
       <%= @questions.count %>
       <%= inclination(@questions.count, "вопрос", "вопроса", "вопрcов") %>
