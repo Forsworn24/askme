@@ -8,13 +8,13 @@
   </div>
 <% end %>
 
+<% if question.hashtags.present? %>
 <div class="hashtag">
-  <% if question.hashtags.present? %>
     <% question.hashtags.select(:name).distinct.each do |tag| %>
       <%= link_to "##{tag.name}", hashtag_path(tag.name), class: 'text-lead' %>
     <% end %>
-  <% end %>
 </div>
+<% end %>
 
 <div class="text-sm question-footer">
     <div class="text-grey">

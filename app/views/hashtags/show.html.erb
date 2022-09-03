@@ -1,5 +1,5 @@
 <div class="container mt-sm">
-  <h3> Вопросы с хэштегом: <span> #<%= @hashtag.distinct.pluck(:name).first %> </span> </h3>
+  <h3> Вопросы с хэштегом: <span> #<%= @hashtag.name %> </span> </h3>
 </div>
 <% @questions.each do |question| %>
   <div class="mt-sm container">
