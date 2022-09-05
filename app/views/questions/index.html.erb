@@ -16,7 +16,6 @@
         Список хештегов
       </h2>
       <div class="hashtag">
-        
           <% @hashtags.select(:name).distinct.each do |tag| %>
             <%= link_to "##{tag.name}", hashtag_path(tag.name), class: 'text-lead' %>
           <% end %>

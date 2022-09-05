@@ -1,7 +1,7 @@
 <div class="container mt-sm">
   <h3> Вопросы с хэштегом: <span> #<%= @hashtag.name %> </span> </h3>
 </div>
-<% @questions.each do |question| %>
+<% @hashtag.questions.each do |question| %>
   <div class="mt-sm container">
     <p class="mb test-sm text-grey">
       Вопрос <%= link_to "##{question.id}", question_path(question) %>
