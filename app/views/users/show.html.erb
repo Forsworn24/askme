@@ -21,6 +21,8 @@
     <p class="mt">
       <%= render 'questions/form', question: @question %>
     </p>
+
+    <%= recaptcha_tags size: 'compact' unless current_user.present? %>
   </div>
 
   <div class="container mt-sm">

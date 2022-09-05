@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
     
-    if @question.save
+    if @question.save && check_captcha(@question)
       redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
     else
       flash.now[:alert] = "Вы неправильно заполнили поля формы вопроса, количество символов не должно превышать 280"
@@ -69,5 +69,9 @@ class QuestionsController < ApplicationController
 
   def set_question_for_current_user
     @question = current_user.questions.find(params[:id])
+  end
+
+  def check_captcha(model)
+    current_user.present? || verify_recaptcha(model: model)
   end
 end
