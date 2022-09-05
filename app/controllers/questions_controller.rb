@@ -8,6 +8,8 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.author = current_user
     
+    debugger
+
     if @question.save && check_captcha(@question)
       redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
     else
@@ -72,6 +74,6 @@ class QuestionsController < ApplicationController
   end
 
   def check_captcha(model)
-    current_user.present? || verify_recaptcha(model: model)
+    current_user.present? || verify_recaptcha(model: model, error: "Неверная рекапча")
   end
 end
