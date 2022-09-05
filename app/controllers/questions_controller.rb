@@ -7,8 +7,6 @@ class QuestionsController < ApplicationController
   
     @question = Question.new(question_params)
     @question.author = current_user
-    
-    debugger
 
     if @question.save && check_captcha(@question)
       redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
