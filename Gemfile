@@ -34,5 +34,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'dotenv-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
