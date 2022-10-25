@@ -32,13 +32,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # @question = Question.find_by user_id: current_user.id
     @question = Question.find(params[:id])
   end
 
   def index
     @questions = Question.order(created_at: :desc).last(10)
     @users = User.order(created_at: :desc).last(10)
+    @hashtags = Hashtag.joins(:questions)
   end
 
   def new
@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
       redirect_to(user_nickname: user)
       return
     end
-    # @user = User.find_by!(nickname: params[:user_id])
+    
     @user = User.find_by!(nickname: params[:user_nickname])
     @question = Question.new(user: @user)
   end

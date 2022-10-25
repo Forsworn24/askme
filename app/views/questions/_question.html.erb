@@ -8,29 +8,37 @@
   </div>
 <% end %>
 
-<div class="text-sm question-footer">
-  <div class="text-grey">
-    <%= l(question.created_at, format: :short) %>
-    <% if question.author.present? %>
-      <p class="text-black">Автор вопроса: <%= link_to "@#{question.author.nickname}", user_path(question.author)  %></p>
-    <% else %>
-      <p class="text-black">Автор вопроса: Аноним</p>
+<% if question.hashtags.present? %>
+<div class="hashtag">
+    <% question.hashtags.select(:name).distinct.each do |tag| %>
+      <%= link_to "##{tag.name}", hashtag_path(tag.name), class: 'text-lead' %>
     <% end %>
-  </div>
+</div>
+<% end %>
 
-  <% if current_user == question.user %>
-    <div>
-      <% edit_icon = (question.answer.present? ? "pencil" : "reply") %>
-
-      <%= link_to fa_icon(edit_icon), edit_question_path(question),
-        title: "Изменить вопрос", class: "mr-sm" %>
-
-      <% if !question.hidden %>
-
-      <%= link_to fa_icon("eye-slash"), hide_question_path(question), title: "Скрыть вопрос" %>
+<div class="text-sm question-footer">
+    <div class="text-grey">
+      <%= l(question.created_at, format: :short) %>
+      <% if question.author.present? %>
+        <p class="text-black">Автор вопроса: <%= link_to "@#{question.author.nickname}", user_path(question.author)  %></p>
+      <% else %>
+        <p class="text-black">Автор вопроса: Аноним</p>
       <% end %>
-      <%= button_to fa_icon("trash-o"), question_path(question), method: :delete, title: "Удалить вопрос",
-        form: {data: {turbo_confirm: 'Точно удалить вопрос?'}} %>
     </div>
-  <% end %>
+
+    <% if current_user == question.user %>
+      <div>
+        <% edit_icon = (question.answer.present? ? "pencil" : "reply") %>
+
+        <%= link_to fa_icon(edit_icon), edit_question_path(question),
+          title: "Изменить вопрос", class: "mr-sm" %>
+
+        <% if !question.hidden %>
+
+        <%= link_to fa_icon("eye-slash"), hide_question_path(question), title: "Скрыть вопрос" %>
+        <% end %>
+        <%= button_to fa_icon("trash-o"), question_path(question), method: :delete, title: "Удалить вопрос",
+          form: {data: {turbo_confirm: 'Точно удалить вопрос?'}} %>
+      </div>
+    <% end %>
 </div>

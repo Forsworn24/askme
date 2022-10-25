@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  # если редирект в before_action - он прерывает выполнение контроллера
-  # если в контроллере - не прерывает
   before_action :set_user, only: %i[show edit update destroy]
   before_action :authorise_user, only: %i[edit update destroy]
 
