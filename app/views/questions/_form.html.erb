@@ -8,6 +8,9 @@
       <p class="mt"><%= form.label :answer, 'Ответ' %></p>
       <p><%= form.text_area :answer, rows: 5, class: 'form-text-area' %></p>
     <% end %>
+
+    <%= recaptcha_tags unless current_user.present? %>
+
     <p class="mt"><%= form.submit 'Сохранить', class: 'button button-main' %> или <%= link_to 'вернуться', :back %></p>
   <% end %>
   
